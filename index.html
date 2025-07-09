@@ -1,0 +1,2153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investure - Invest in India's Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2A9D8F;
+            --accent: #F4A261;
+            --background: #F1FAEE;
+            --text: #2D2D2D;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --border: #E9ECEF;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, #21867a 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Enhanced Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease-out 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(244, 162, 97, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #e8956b;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(244, 162, 97, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Stats Counter */
+        .stats {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            color: var(--white);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Enhanced How It Works Section */
+        .how-it-works {
+            padding: 8rem 0;
+            background: var(--white);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+            position: relative;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .step {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-radius: 1.5rem;
+            background: var(--light-gray);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .step:hover::before {
+            opacity: 0.05;
+        }
+
+        .step:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .step-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2.5rem;
+            color: var(--white);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step:hover .step-icon {
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        .step h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+
+        .step p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Investment Calculator */
+        .calculator {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .calculator-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 3rem;
+        }
+
+        .calculator h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .calculator p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .calc-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .input-group {
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            background: var(--white);
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .calc-result {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .result-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Enhanced Featured Startups Section */
+        .featured-startups {
+            padding: 8rem 0;
+            background: var(--background);
+        }
+
+        .startup-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--border);
+            background: var(--white);
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .startup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .startup-card {
+            background: var(--white);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .startup-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .startup-card:hover::before {
+            opacity: 0.03;
+        }
+
+        .startup-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .startup-card-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .startup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .startup-logo {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .startup-card:hover .startup-logo {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .startup-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .startup-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .startup-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--light-gray);
+            color: var(--text);
+            padding: 0.4rem 1rem;
+            border-radius: 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            transform: scale(1.05);
+        }
+
+        .tag.equity {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .tag.debt {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .tag.fintech {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .assured-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: #4caf50;
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .startup-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .startup-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 0.75rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        .startup-card .btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 3rem;
+            border-radius: 1.5rem;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .close {
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        /* Enhanced Assurance Section */
+        .assurance {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .assurance::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 30s linear infinite;
+        }
+
+        .assurance-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .assurance-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .assurance-badge:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .assurance p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 0;
+            background: var(--white);
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .testimonial-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .testimonial-role {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Enhanced Footer */
+        .footer {
+            background: var(--text);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            transform: translateY(-5px) rotate(5deg);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #444;
+            padding-top: 2rem;
+            text-align: center;
+            color: #ccc;
+        }
+
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1500;
+        }
+
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--white);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.125rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .calc-inputs {
+                grid-template-columns: 1fr;
+            }
+
+            .startup-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .startup-filters {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+
+            .assurance-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                padding: 2rem;
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 4rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .startup-card {
+                padding: 1.5rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 2rem;
+            background: var(--white);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 1600;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .notification-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="logo">Investure</a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#browse">Browse Startups</a></li>
+                    <li><a href="#assured">Assured Startups</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#login">Login</a></li>
+                </ul>
+                <div class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Invest in India's Future</h1>
+                <p>From ₹10,000 to ₹1,00,000 — Back the startups shaping tomorrow</p>
+                <div class="cta-buttons">
+                    <a href="#browse" class="btn btn-primary">Browse Startups</a>
+                    <a href="#list" class="btn btn-secondary">List Your Startup</a>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number" data-target="500">0</span>
+                        <div class="stat-label">Active Startups</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="25000">0</span>
+                        <div class="stat-label">Investors</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="150">0</span>
+                        <div class="stat-label">Crores Invested</div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-target="85">0</span>
+                        <div class="stat-label">Success Rate %</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title fade-in">How Investure Works</h2>
+            <p class="section-subtitle fade-in">Simple, transparent, and secure investment process</p>
+            <div class="steps">
+                <div class="step fade-in" data-step="1">
+                    <div class="step-content">
+                        <div class="step-icon">🔍</div>
+                        <h3>Discover</h3>
+                        <p>Browse curated startups by industry, region, or funding type. Find opportunities that match your investment goals and risk appetite with our advanced filtering system.</p>
+                    </div>
+                </div>
+                <div class="step fade-in" data-step="2">
+                    <div class="step-content">
+                        <div class="step-icon">📊</div>
+                        <h3>Analyze</h3>
+                        <p>See detailed financials and track performance like mutual funds. Get comprehensive insights, due diligence reports, and real-time analytics before making investment decisions.</p>
+                    </div>
+                </div>
+                <div class="step fade-in" data-step="3">
+                    <div class="step-content">
+                        <div class="step-icon">💰</div>
+                        <h3>Invest</h3>
+                        <p>Start with as little as ₹10,000 in equity or debt. Build a diversified portfolio of promising Indian startups with automated portfolio management tools.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Calculator -->
+    <section class="calculator" id="calculator">
+        <div class="container">
+            <div class="calculator-container fade-in">
+                <h2>Investment Calculator</h2>
+                <p>See how your investment could grow over time</p>
+                <div class="calc-inputs">
+                    <div class="input-group">
+                        <label for="investment">Investment Amount (₹)</label>
+                        <input type="number" id="investment" value="50000" min="10000" max="1000000">
+                    </div>
+                    <div class="input-group">
+                        <label for="years">Investment Period (Years)</label>
+                        <input type="number" id="years" value="5" min="1" max="10">
+                    </div>
+                    <div class="input-group">
+                        <label for="returns">Expected Returns (%)</label>
+                        <input type="number" id="returns" value="25" min="5" max="50">
+                    </div>
+                </div>
+                <div class="calc-result">
+                    <div class="result-value" id="resultValue">₹1,52,587</div>
+                    <div>Potential Returns</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Startups Section -->
+    <section class="featured-startups" id="featured">
+        <div class="container">
+            <h2 class="section-title fade-in">Featured Startups</h2>
+            <p class="section-subtitle fade-in">Handpicked opportunities from India's most promising startups</p>
+            
+            <div class="startup-filters fade-in">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="fintech">FinTech</button>
+                <button class="filter-btn" data-filter="agritech">AgriTech</button>
+                <button class="filter-btn" data-filter="edtech">EdTech</button>
+                <button class="filter-btn" data-filter="healthtech">HealthTech</button>
+                <button class="filter-btn" data-filter="equity">Equity</button>
+                <button class="filter-btn" data-filter="debt">Debt</button>
+            </div>
+
+            <div class="startup-grid" id="startupGrid">
+                <div class="startup-card fade-in" data-category="fintech equity" data-startup="techflow">
+                    <div class="assured-badge">✅ Assured</div>
+                    <div class="startup-card-content">
+                        <div class="startup-header">
+                            <div class="startup-logo">TF</div>
+                        </div>
+                        <h3>TechFlow Solutions</h3>
+                        <div class="startup-meta">
+                            <span>📍 Bangalore</span>
+                            <span>👥 50+ employees</span>
+                            <span>📅 Founded 2021</span>
+                        </div>
+                        <div class="startup-tags">
+                            <span class="tag fintech">FinTech</span>
+                            <span class="tag equity">Equity</span>
+                            <span class="tag">Series A</span>
+                        </div>
+                        <p class="startup-description">AI-powered financial planning platform helping millennials achieve their financial goals through smart automation and personalized investment strategies.</p>
+                        <div class="startup-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">₹2.5Cr</div>
+                                <div class="stat-label">Revenue</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">45%</div>
+                                <div class="stat-label">Growth Rate</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">₹25K</div>
+                                <div class="stat-label">Min Investment</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">12%</div>
+                                <div class="stat-label">Equity Offered</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary startup-details-btn">View Details</button>
+                    </div>
+                </div>
+
+                <div class="startup-card fade-in" data-category="agritech debt" data-startup="greenharvest">
+                    <div class="startup-card-content">
+                        <div class="startup-header">
+                            <div class="startup-logo">GH</div>
+                        </div>
+                        <h3>GreenHarvest</h3>
+                        <div class="startup-meta">
+                            <span>📍 Pune</span>
+                            <span>👥 30+ employees</span>
+                            <span>📅 Founded 2020</span>
+                        </div>
+                        <div class="startup-tags">
+                            <span class="tag">AgriTech</span>
+                            <span class="tag debt">Debt</span>
+                            <span class="tag">Growth</span>
+                        </div>
+                        <p class="startup-description">Sustainable farming solutions connecting rural farmers with urban markets through technology-driven supply chain optimization and direct-to-consumer platforms.</p>
+                        <div class="startup-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">₹1.8Cr</div>
+                                <div class="stat-label">Revenue</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">60%</div>
+                                <div class="stat-label">Growth Rate</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">₹15K</div>
+                                <div class="stat-label">Min Investment</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">18%</div>
+                                <div class="stat-label">Interest Rate</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary startup-details-btn">View Details</button>
+                    </div>
+                </div>
+
+                <div class="startup-card fade-in" data-category="edtech equity" data-startup="edulearn">
+                    <div class="assured-badge">✅ Assured</div>
+                    <div class="startup-card-content">
+                        <div class="startup-header">
+                            <div class="startup-logo">EL</div>
+                        </div>
+                        <h3>EduLearn Pro</h3>
+                        <div class="startup-meta">
+                            <span>📍 Delhi</span>
+                            <span>👥 75+ employees</span>
+                            <span>📅 Founded 2019</span>
+                        </div>
+                        <div class="startup-tags">
+                            <span class="tag">EdTech</span>
+                            <span class="tag equity">Equity</span>
+                            <span class="tag">Seed</span>
+                        </div>
+                        <p class="startup-description">Personalized learning platform using AI to adapt to individual student needs and improve learning outcomes through gamification and interactive content.</p>
+                        <div class="startup-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">₹3.2Cr</div>
+                                <div class="stat-label">Revenue</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">80%</div>
+                                <div class="stat-label">Growth Rate</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">₹20K</div>
+                                <div class="stat-label">Min Investment</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">8%</div>
+                                <div class="stat-label">Equity Offered</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary startup-details-btn">View Details</button>
+                    </div>
+                </div>
+
+                <div class="startup-card fade-in" data-category="healthtech equity" data-startup="medtech">
+                    <div class="startup-card-content">
+                        <div class="startup-header">
+                            <div class="startup-logo">MT</div>
+                        </div>
+                        <h3>MedTech Innovations</h3>
+                        <div class="startup-meta">
+                            <span>📍 Chennai</span>
+                            <span>👥 40+ employees</span>
+                            <span>📅 Founded 2022</span>
+                        </div>
+                        <div class="startup-tags">
+                            <span class="tag">HealthTech</span>
+                            <span class="tag equity">Equity</span>
+                            <span class="tag">Pre-Series A</span>
+                        </div>
+                        <p class="startup-description">Revolutionary telemedicine platform providing affordable healthcare access to rural India through AI-powered diagnostics and remote consultation services.</p>
+                        <div class="startup-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">₹1.2Cr</div>
+                                <div class="stat-label">Revenue</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">120%</div>
+                                <div class="stat-label">Growth Rate</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">₹30K</div>
+                                <div class="stat-label">Min Investment</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">15%</div>
+                                <div class="stat-label">Equity Offered</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary startup-details-btn">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title fade-in">What Our Investors Say</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial active">
+                    <p class="testimonial-text">"Investure has democratized startup investing for people like me. I started with just ₹25,000 and now have a diversified portfolio of 8 startups. The platform's transparency and due diligence process gives me confidence in my investments."</p>
+                    <div class="testimonial-author">Priya Sharma</div>
+                    <div class="testimonial-role">Software Engineer, Mumbai</div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"As a first-time investor, I was nervous about startup investments. Investure's educational resources and assured startup program helped me make informed decisions. My portfolio has grown by 35% in just 18 months!"</p>
+                    <div class="testimonial-author">Rajesh Kumar</div>
+                    <div class="testimonial-role">Marketing Manager, Bangalore</div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"The platform's user experience is exceptional. I can track all my investments in real-time, get regular updates from startups, and the customer support team is always helpful. Highly recommended for anyone looking to invest in India's startup ecosystem."</p>
+                    <div class="testimonial-author">Anita Patel</div>
+                    <div class="testimonial-role">Doctor, Ahmedabad</div>
+                </div>
+            </div>
+            <div class="testimonial-nav">
+                <span class="testimonial-dot active" data-slide="0"></span>
+                <span class="testimonial-dot" data-slide="1"></span>
+                <span class="testimonial-dot" data-slide="2"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assurance Section -->
+    <section class="assurance" id="assured">
+        <div class="container">
+            <div class="assurance-content fade-in">
+                <div class="assurance-badge" id="assuranceBadge">✅ Investure Assured</div>
+                <p>We vet select startups for trust, traction, and transparency. Our rigorous due diligence process includes financial audits, legal compliance checks, and market validation assessments.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Investure</h3>
+                    <p>Democratizing startup investments for every Indian. Start your investment journey with as little as ₹10,000 and be part of India's growth story.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">📘</a>
+                        <a href="#" class="social-icon">🐦</a>
+                        <a href="#" class="social-icon">📷</a>
+                        <a href="#" class="social-icon">💼</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Investor Relations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Risk Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Invest</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Browse Startups</a></li>
+                        <li><a href="#">Assured Startups</a></li>
+                        <li><a href="#">Investment Guide</a></li>
+                        <li><a href="#">Portfolio Tracker</a></li>
+                        <li><a href="#">Tax Benefits</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Investure. All rights reserved. | Regulated by SEBI | CIN: U74999MH2024PTC123456</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="startupModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-button" id="chatButton">💬</div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-title">Welcome to Investure!</div>
+        <div class="notification-text">Discover amazing startup investment opportunities</div>
+    </div>
+
+    <script>
+        // Enhanced JavaScript functionality
+        class InvestureApp {
+            constructor() {
+                this.init();
+                this.setupEventListeners();
+                this.startAnimations();
+            }
+
+            init() {
+                this.navbar = document.getElementById('navbar');
+                this.navToggle = document.getElementById('navToggle');
+                this.navLinks = document.getElementById('navLinks');
+                this.modal = document.getElementById('startupModal');
+                this.modalContent = document.getElementById('modalContent');
+                this.notification = document.getElementById('notification');
+                
+                // Show welcome notification
+                setTimeout(() => {
+                    this.showNotification();
+                }, 2000);
+            }
+
+            setupEventListeners() {
+                // Mobile Navigation
+                this.navToggle.addEventListener('click', () => {
+                    this.navLinks.classList.toggle('active');
+                    this.navToggle.classList.toggle('active');
+                });
+
+                // Close mobile menu when clicking on a link
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        this.navLinks.classList.remove('active');
+                        this.navToggle.classList.remove('active');
+                    });
+                });
+
+                // Navbar scroll effect
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 100) {
+                        this.navbar.classList.add('scrolled');
+                    } else {
+                        this.navbar.classList.remove('scrolled');
+                    }
+                });
+
+                // Smooth scrolling for anchor links
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.querySelector(anchor.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+
+                // Investment Calculator
+                this.setupCalculator();
+
+                // Startup Filters
+                this.setupFilters();
+
+                // Startup Details Modal
+                this.setupModal();
+
+                // Testimonial Slider
+                this.setupTestimonialSlider();
+
+                // Chat Widget
+                this.setupChatWidget();
+
+                // Interactive Elements
+                this.setupInteractiveElements();
+
+                // Scroll Animations
+                this.setupScrollAnimations();
+            }
+
+            setupCalculator() {
+                const investmentInput = document.getElementById('investment');
+                const yearsInput = document.getElementById('years');
+                const returnsInput = document.getElementById('returns');
+                const resultValue = document.getElementById('resultValue');
+
+                const calculateReturns = () => {
+                    const investment = parseFloat(investmentInput.value) || 0;
+                    const years = parseFloat(yearsInput.value) || 0;
+                    const returns = parseFloat(returnsInput.value) || 0;
+                    
+                    const futureValue = investment * Math.pow(1 + returns/100, years);
+                    const totalReturns = futureValue - investment;
+                    
+                    resultValue.textContent = `₹${totalReturns.toLocaleString('en-IN')}`;
+                    
+                    // Animate the result
+                    resultValue.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        resultValue.style.transform = 'scale(1)';
+                    }, 200);
+                };
+
+                [investmentInput, yearsInput, returnsInput].forEach(input => {
+                    input.addEventListener('input', calculateReturns);
+                });
+
+                // Initial calculation
+                calculateReturns();
+            }
+
+            setupFilters() {
+                const filterBtns = document.querySelectorAll('.filter-btn');
+                const startupCards = document.querySelectorAll('.startup-card');
+
+                filterBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // Remove active class from all buttons
+                        filterBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+
+                        const filter = btn.dataset.filter;
+
+                        startupCards.forEach(card => {
+                            if (filter === 'all' || card.dataset.category.includes(filter)) {
+                                card.style.display = 'block';
+                                card.style.animation = 'fadeIn 0.5s ease-in';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            }
+
+            setupModal() {
+                const detailsBtns = document.querySelectorAll('.startup-details-btn');
+                const closeBtn = document.querySelector('.close');
+
+                detailsBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const card = e.target.closest('.startup-card');
+                        const startupData = this.getStartupData(card.dataset.startup);
+                        this.showModal(startupData);
+                    });
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    this.hideModal();
+                });
+
+                window.addEventListener('click', (e) => {
+                    if (e.target === this.modal) {
+                        this.hideModal();
+                    }
+                });
+            }
+
+            getStartupData(startupId) {
+                const startupData = {
+                    techflow: {
+                        name: 'TechFlow Solutions',
+                        logo: 'TF',
+                        industry: 'FinTech',
+                        location: 'Bangalore',
+                        founded: '2021',
+                        employees: '50+',
+                        description: 'AI-powered financial planning platform helping millennials achieve their financial goals through smart automation and personalized investment strategies.',
+                        revenue: '₹2.5 Crores',
+                        growth: '45%',
+                        minInvestment: '₹25,000',
+                        equity: '12%',
+                        fundingStage: 'Series A',
+                        totalFunding: '₹15 Crores',
+                        investors: ['Sequoia Capital', 'Accel Partners'],
+                        keyMetrics: {
+                            users: '50,000+',
+                            retention: '85%',
+                            cac: '₹450',
+                            ltv: '₹12,000'
+                        }
+                    },
+                    greenharvest: {
+                        name: 'GreenHarvest',
+                        logo: 'GH',
+                        industry: 'AgriTech',
+                        location: 'Pune',
+                        founded: '2020',
+                        employees: '30+',
+                        description: 'Sustainable farming solutions connecting rural farmers with urban markets through technology-driven supply chain optimization.',
+                        revenue: '₹1.8 Crores',
+                        growth: '60%',
+                        minInvestment: '₹15,000',
+                        interest: '18%',
+                        fundingStage: 'Growth',
+                        totalFunding: '₹8 Crores',
+                        investors: ['Omnivore Partners', 'Ankur Capital'],
+                        keyMetrics: {
+                            farmers: '5,000+',
+                            orders: '25,000/month',
+                            wastage: '-40%',
+                            income: '+60%'
+                        }
+                    }
+                };
+
+                return startupData[startupId] || startupData.techflow;
+            }
+
+            showModal(data) {
+                this.modalContent.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                        <div style="width: 80px; height: 80px; background: var(--gradient); border-radius: 1rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: 700;">${data.logo}</div>
+                        <div>
+                            <h2 style="margin: 0; font-size: 2rem;">${data.name}</h2>
+                            <p style="margin: 0.5rem 0; color: #666;">${data.industry} • ${data.location} • Founded ${data.founded}</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        <div style="background: var(--light-gray); padding: 1rem; border-radius: 0.75rem; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 600; color: var(--primary);">${data.revenue}</div>
+                            <div style="color: #666;">Annual Revenue</div>
+                        </div>
+                        <div style="background: var(--light-gray); padding: 1rem; border-radius: 0.75rem; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 600; color: var(--primary);">${data.growth}</div>
+                            <div style="color: #666;">Growth Rate</div>
+                        </div>
+                        <div style="background: var(--light-gray); padding: 1rem; border-radius: 0.75rem; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 600; color: var(--primary);">${data.minInvestment}</div>
+                            <div style="color: #666;">Min Investment</div>
+                        </div>
+                        <div style="background: var(--light-gray); padding: 1rem; border-radius: 0.75rem; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 600; color: var(--primary);">${data.equity || data.interest}</div>
+                            <div style="color: #666;">${data.equity ? 'Equity Offered' : 'Interest Rate'}</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="margin-bottom: 1rem;">About the Company</h3>
+                        <p style="line-height: 1.6; color: #666;">${data.description}</p>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                        <div>
+                            <h4 style="margin-bottom: 1rem;">Key Metrics</h4>
+                            <div style="background: var(--light-gray); padding: 1.5rem; border-radius: 0.75rem;">
+                                ${Object.entries(data.keyMetrics).map(([key, value]) => `
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                        <span style="text-transform: capitalize;">${key.replace(/([A-Z])/g, ' $1').trim()}:</span>
+                                        <strong>${value}</strong>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 1rem;">Investment Details</h4>
+                            <div style="background: var(--light-gray); padding: 1.5rem; border-radius: 0.75rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Funding Stage:</span>
+                                    <strong>${data.fundingStage}</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Total Funding:</span>
+                                    <strong>${data.totalFunding}</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Employees:</span>
+                                    <strong>${data.employees}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="margin-bottom: 1rem;">Previous Investors</h4>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            ${data.investors.map(investor => `
+                                <span style="background: var(--primary); color: white; padding: 0.5rem 1rem; border-radius: 1rem; font-size: 0.9rem;">${investor}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button class="btn btn-primary" style="flex: 1; max-width: 200px;" onclick="investureApp.showInvestmentForm('${data.name}')">Invest Now</button>
+                        <button class="btn btn-secondary" style="flex: 1; max-width: 200px;" onclick="investureApp.downloadPitchDeck('${data.name}')">Download Pitch Deck</button>
+                    </div>
+                `;
+                
+                this.modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+
+            hideModal() {
+                this.modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            showInvestmentForm(startupName) {
+                alert(`Investment form for ${startupName} would open here. This would integrate with payment gateway and KYC verification.`);
+            }
+
+            downloadPitchDeck(startupName) {
+                alert(`Downloading pitch deck for ${startupName}. In a real app, this would download a PDF file.`);
+            }
+
+            setupTestimonialSlider() {
+                const testimonials = document.querySelectorAll('.testimonial');
+                const dots = document.querySelectorAll('.testimonial-dot');
+                let currentSlide = 0;
+
+                const showSlide = (index) => {
+                    testimonials.forEach(t => t.classList.remove('active'));
+                    dots.forEach(d => d.classList.remove('active'));
+                    
+                    testimonials[index].classList.add('active');
+                    dots[index].classList.add('active');
+                };
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        currentSlide = index;
+                        showSlide(currentSlide);
+                    });
+                });
+
+                // Auto-advance testimonials
+                setInterval(() => {
+                    currentSlide = (currentSlide + 1) % testimonials.length;
+                    showSlide(currentSlide);
+                }, 5000);
+            }
+
+            setupChatWidget() {
+                const chatButton = document.getElementById('chatButton');
+                
+                chatButton.addEventListener('click', () => {
+                    this.showChatInterface();
+                });
+            }
+
+            showChatInterface() {
+                alert('Chat interface would open here. In a real app, this would connect to customer support or a chatbot.');
+            }
+
+            setupInteractiveElements() {
+                // Enhanced button interactions
+                document.querySelectorAll('.btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        this.createRippleEffect(e, btn);
+                    });
+                });
+
+                // Startup card interactions
+                document.querySelectorAll('.startup-card').forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-10px) scale(1.02)';
+                        card.style.transition = 'all 0.3s ease';
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0) scale(1)';
+                    });
+                });
+
+                // Step interactions
+                document.querySelectorAll('.step').forEach(step => {
+                    step.addEventListener('click', () => {
+                        const stepNumber = step.dataset.step;
+                        this.showStepDetails(stepNumber);
+                    });
+                });
+
+                // Assurance badge interaction
+                document.getElementById('assuranceBadge').addEventListener('click', () => {
+                    this.showAssuranceDetails();
+                });
+            }
+
+            createRippleEffect(e, element) {
+                const ripple = document.createElement('span');
+                const rect = element.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                ripple.style.pointerEvents = 'none';
+                
+                element.style.position = 'relative';
+                element.style.overflow = 'hidden';
+                element.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            }
+
+            showStepDetails(stepNumber) {
+                const details = {
+                    '1': 'Our discovery process includes advanced filtering by industry, location, funding stage, and risk level. You can also use our AI-powered recommendation engine to find startups that match your investment profile.',
+                    '2': 'Our analysis includes comprehensive due diligence reports, financial statements, market research, competitive analysis, and real-time performance tracking with detailed dashboards.',
+                    '3': 'Investment process is fully digital with secure payment gateway integration, automated documentation, portfolio management tools, and regular updates from your invested startups.'
+                };
+                
+                alert(details[stepNumber] || 'Step details not available.');
+            }
+
+            showAssuranceDetails() {
+                const details = `
+                    Investure Assured Program includes:
+                    
+                    ✅ Financial Audit by certified CAs
+                    ✅ Legal compliance verification
+                    ✅ Market validation assessment
+                    ✅ Management team background checks
+                    ✅ Business model viability analysis
+                    ✅ Continuous monitoring and reporting
+                    
+                    Only 15% of startups qualify for our Assured program.
+                `;
+                alert(details);
+            }
+
+            setupScrollAnimations() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            
+                            // Special handling for counters
+                            if (entry.target.classList.contains('stat-number')) {
+                                this.animateCounter(entry.target);
+                            }
+                        }
+                    });
+                }, observerOptions);
+
+                // Observe all animated elements
+                document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right').forEach(el => {
+                    observer.observe(el);
+                });
+
+                // Observe stat numbers for counter animation
+                document.querySelectorAll('.stat-number').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+
+            animateCounter(element) {
+                const target = parseInt(element.dataset.target);
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    element.textContent = Math.floor(current).toLocaleString('en-IN');
+                }, 16);
+            }
+
+            startAnimations() {
+                // Add initial animations
+                setTimeout(() => {
+                    document.querySelectorAll('.fade-in').forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.add('visible');
+                        }, index * 100);
+                    });
+                }, 500);
+            }
+
+            showNotification() {
+                this.notification.classList.add('show');
+                setTimeout(() => {
+                    this.notification.classList.remove('show');
+                }, 4000);
+            }
+        }
+
+        // Initialize the app
+        const investureApp = new InvestureApp();
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add some dynamic content updates
+        setInterval(() => {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const current = parseInt(stat.textContent.replace(/,/g, ''));
+                const increase = Math.floor(Math.random() * 5) + 1;
+                const newValue = current + increase;
+                stat.textContent = newValue.toLocaleString('en-IN');
+            });
+        }, 30000); // Update every 30 seconds
+
+        // Add loading state simulation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'k':
+                        e.preventDefault();
+                        document.querySelector('#investment').focus();
+                        break;
+                    case 'm':
+                        e.preventDefault();
+                        investureApp.showModal(investureApp.getStartupData('techflow'));
+                        break;
+                    case 'c':
+                        e.preventDefault();
+                        investureApp.showChatInterface();
+                        break;
+                }
+            }
+            
+            if (e.key === 'Escape') {
+                investureApp.hideModal();
+            }
+        });
+
+        // Add performance monitoring
+        if ('performance' in window) {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    console.log(`Page load time: ${perfData.loadEventEnd - perfData.loadEventStart}ms`);
+                }, 0);
+            });
+        }
+
+        // Add service worker for PWA capabilities (basic implementation)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // In a real app, you would register a service worker here
+                console.log('Service Worker support detected');
+            });
+        }
+    </script>
+</body>
+</html>
